@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import '../App.css'
 import 'bootstrap/dist/css/bootstrap.css';
+import Button from '@material-ui/core/Button';
+import {withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import green from '@material-ui/core/colors/green';
+const styles = theme => ({
+    margin: {
+        margin: theme.spacing.unit,
+    }
+})
+
 
 class Header extends Component {
     constructor(props){
@@ -9,6 +19,8 @@ class Header extends Component {
             toDoItemValue: '',
         }
     }
+
+
 
     handleChange = e => {
         if(this.state.toDoItemValue === ''){
@@ -27,14 +39,30 @@ class Header extends Component {
     }
 
     render() {
+        const theme = createMuiTheme({
+            palette: {
+                primary: green,
+            },
+            typography: { useNextVariants: true },
+        });
+        const { classes } = this.props;
+
         return (
-            <div className="navbar row navbar-dark bg-danger align-items-center">
+            <div className="navbar row navbar-dark bg-info align-items-center">
             <p className='h1 text-warning col-lg-4'>My To Do List</p>
-            <input className='form-control ds-input col-lg-4' placeholder="What do I need to do..." type='text' value={this.state.toDoItemValue} onChange={this.handleChange} />
-              <div className='col-lg-4'><button type="button" className="btn btn-info float-left"  onClick={this.handleAddButonClick}>Add</button></div>
+                <div className='col-lg-4'><MuiThemeProvider theme={theme}>
+                    <TextField
+                        className={classes.margin}
+                        label="What do I need to do..."
+                        variant="outlined"
+                        id="mui-theme-provider-outlined-input"
+                        value={this.state.toDoItemValue} onChange={this.handleChange}
+                    />
+                </MuiThemeProvider></div>
+              <div className='col-lg-4'><Button variant="contained" color="primary" className='float-left col-lg-4'  onClick={this.handleAddButonClick}>Add</Button></div>
             </div>
         );
     }
 }
 
-export default Header;
+export default withStyles(styles)(Header);

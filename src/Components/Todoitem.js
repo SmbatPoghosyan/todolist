@@ -30,7 +30,7 @@ export default class Todoitem extends Component {
         let xColor = this.props.index % 2 !== 0 || this.state.done ? 'white' : '#290033';
         let todoItemName = this.state.done ? <del className={todoItemTextClass}>{this.props.todoItemName}</del> : <span className={todoItemTextClass}>{this.props.todoItemName}</span>;
         let className = this.state.done ? "navbar row navbar-dark bg-dark align-items-center text-white" : ` navbar row navbar-light ${backgrounColor} align-items-center`;
-        let check = this.state.done ? <FontAwesomeIcon className='float-left' icon="check-circle"/> : '';
+        let check = this.state.done ? <FontAwesomeIcon className='float-left' icon="check-circle"/> : ''; // eslint-disable-next-line
         return <a onClick={this.done} className={className}>
             <div className='col-lg-4'>{check}</div>
             <div className='col-lg-4'>{todoItemName}</div>
